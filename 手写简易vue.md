@@ -51,7 +51,7 @@ Watcher
 ### 实现简易Vue
 
 > ___实现思路___
-> + KVue：框架构造函数
+> + Vue：框架构造函数
 > + Observer：执⾏数据响应化（分辨数据是对象还是数组）
 > + Compile：编译模板，初始化视图，收集依赖（更新函数、watcher创建）
 > + Watcher：执⾏更新函数（更新dom）
@@ -145,7 +145,7 @@ class Compile {
   }
 
   isDir(attrName) {
-    return attrName.startsWith('k-')
+    return attrName.startsWith('v-')
   }
   
   // update: 给传入的node做初始化并创建watcher负责其更新
@@ -176,8 +176,8 @@ class Compile {
     // 获取节点特性
     const nodeAttrs = node.attributes
     Array.from(nodeAttrs).forEach(attr => {
-      // k-text="xx"
-      const attrName = attr.name // k-text
+      // v-text="xx"
+      const attrName = attr.name // v-text
       const exp = attr.value // xx
       if (this.isDir(attrName)) {
         // 指令
@@ -188,12 +188,12 @@ class Compile {
     })
   }
 
-  // k-text
+  // v-text
   text(node, exp) {
     this.update(node, exp, 'text')
   }
 
-  // k-html
+  // v-html
   html(node, exp) {
     this.update(node, exp, 'html')
   }
